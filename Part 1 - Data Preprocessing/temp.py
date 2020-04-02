@@ -6,11 +6,12 @@ This is a temporary script file.
 """
 
 import numpy as np
-import matplotlib.pyplot as plt
+#import matplotlib.pyplot as plt
 import pandas as pd
-from sklearn.preprocessing import LabelEncoder, OneHotEncoder
+from sklearn.preprocessing import LabelEncoder, OneHotEncoder, StandardScaler
 from sklearn.compose import ColumnTransformer
 from sklearn.impute import SimpleImputer
+from sklearn.model_selection import train_test_split
 
 # importing the dataset
 df = pd.read_csv('Data.csv')
@@ -42,4 +43,16 @@ X = np.array(columntransformer.fit_transform(X),dtype=np.float)
 
 labelencoder_y = LabelEncoder()
 y = labelencoder_y.fit_transform(y)
+
+# splitting the daset into train and test
+X_train, X_test, y_train, y_test = train_test_split(X, y, 
+                                                    test_size = 0.2, 
+                                                    random_state = 0)
+# feature scaling -> example, age difference and salary difference
+sc_X = StandardScaler()
+X_train = sc_X.fit_transform(X_train)
+X_test = sc_X.transform(X_test)
+
+
+
 
