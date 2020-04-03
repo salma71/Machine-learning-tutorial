@@ -13,6 +13,8 @@ from sklearn.preprocessing import OneHotEncoder
 from sklearn.model_selection import train_test_split
 from sklearn.linear_model import LinearRegression
 
+import statsmodels.api as sm
+
 # Importing the dataset
 dataset = pd.read_csv('50_Startups.csv')
 X = dataset.iloc[:, :-1].values #IV
@@ -27,6 +29,7 @@ X = pd.DataFrame(X)
 
 X = pd.get_dummies(X, columns = [3], drop_first = True)
 
+X = X.to_numpy()
 
 # splitting the data 
 
@@ -41,10 +44,48 @@ regressor.fit(X_train, y_train)
 # predicting on the test set
 y_pred = regressor.predict(X_test)
 
+# building the optimal model using backword elimination 
+
+X = np.append(arr = np.ones((50, 1)).astype(int), values = X, axis = 1)
+# start backword elimination 
+X_opt = X[:, [0,1,2,3,4,5]]
+
+X_opt = np.array(X[:, [0,1,2,3,4,5]], dtype = float)
+
+model = sm.OLS(endog = y, exog = X_opt).fit()
+
+model.summary()
+
+X_opt = X[:, [0,1,2,3,4]]
+
+X_opt = np.array(X[:, [0,1,2,3,4]], dtype = float)
+
+model = sm.OLS(endog = y, exog = X_opt).fit()
+
+model.summary()
 
 
+X_opt = X[:, [0,1,2,3]]
 
+X_opt = np.array(X[:, [0,1,2,3]], dtype = float)
 
+model = sm.OLS(endog = y, exog = X_opt).fit()
 
+model.summary()
 
+X_opt = X[:, [0,1,3]]
+
+X_opt = np.array(X[:, [0,1,3]], dtype = float)
+
+model = sm.OLS(endog = y, exog = X_opt).fit()
+
+model.summary()
+
+X_opt = X[:, [0,1]]
+
+X_opt = np.array(X[:, [0,1]], dtype = float)
+
+model = sm.OLS(endog = y, exog = X_opt).fit()
+
+model.summary()
 
