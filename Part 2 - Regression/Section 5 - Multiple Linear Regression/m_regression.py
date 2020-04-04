@@ -70,7 +70,7 @@ print(X_Modeled)
 """
 
 def backwardElimination(x, SL):
-    numVars = len(x[0])
+    numVars = len(x[0]) # number of variables in my data 
     temp = np.zeros((50,6)).astype(int)
     for i in range(0, numVars):
         regressor_OLS = sm.OLS(y, x).fit()
