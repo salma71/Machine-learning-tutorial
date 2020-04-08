@@ -68,7 +68,7 @@ X_Modeled = backwardElimination(X_opt, SL)
 
 print(X_Modeled)
 """
-
+"""
 def backwardElimination(x, SL):
     numVars = len(x[0]) # number of variables in my data 
     temp = np.zeros((50,6)).astype(int)
@@ -102,8 +102,10 @@ X_opt = np.array(X[:, [0,1,2,3,4,5]], dtype = float)
 
 model = sm.OLS(endog = y, exog = X_opt).fit()
 
-model.summary()
+print(model.summary())
 
+
+"""
 X_opt = X[:, [0,1,2,3,4]]
 
 X_opt = np.array(X[:, [0,1,2,3,4]], dtype = float)
@@ -136,5 +138,4 @@ X_opt = np.array(X[:, [0,1]], dtype = float)
 model = sm.OLS(endog = y, exog = X_opt).fit()
 
 model.summary()
-
 """
